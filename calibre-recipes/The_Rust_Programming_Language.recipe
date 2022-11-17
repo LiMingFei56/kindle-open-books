@@ -1,0 +1,40 @@
+from calibre.web.feeds.recipes import BasicNewsRecipe
+
+class The_Rust_Programming_Language(BasicNewsRecipe):
+
+    title = 'The Rust Programming Language'
+    description = "This version of the text assumes you’re using Rust 1.62 (released 2022-06-30) or later. See the “Installation” section of Chapter 1 to install or update Rust."
+
+    url_prefix = 'https://doc.rust-lang.org/book/'
+    no_stylesheets = True
+    max_articles_per_feed = 500
+    simultaneous_downloads = 10
+    keep_only_tags = [{ 'id': 'content' }]
+
+    def get_title(self, link):
+        return link.string
+
+    def parse_index(self):
+        soup = self.index_to_soup('https://doc.rust-lang.org/book/')
+
+        nav = soup.find("nav", {"class": "sidebar"})
+
+        articles = []
+        for link in nav.find_all("a"):
+            
+            title = self.get_title(link)
+            if title is None:
+                title = ""
+                title = title.join(link.strings)
+                title = title.replace("\xa0", " ")
+
+            if link.get("href") is None:
+                continue
+            url = self.url_prefix + link['href']
+            a = { 'title': title, 'url': url }
+
+            articles.append(a)
+
+        ans = [(title, articles)]
+
+        return ans

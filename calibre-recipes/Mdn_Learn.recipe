@@ -1,0 +1,47 @@
+from calibre.web.feeds.recipes import BasicNewsRecipe
+
+class Mdn_Learn(BasicNewsRecipe):
+
+    title = 'MDN web docs'
+    description = 'The aim of this area of MDN is not to take you from "beginner" to "expert" but to take you from "beginner" to "comfortable." From there, you should be able to start making your way, learning from the rest of MDN, and other intermediate to advanced resources that assume a lot of previous knowledge.'
+    cover_url = None
+
+    url_prefix = 'https://developer.mozilla.org'
+    no_stylesheets = True
+    remove_tags = [
+        {'attrs': {'class': 'brush: bash notranslate', 'class_': 'brush: bash notranslate'}, 'class': 'brush: bash notranslate', 'class_': 'brush: bash notranslate'},
+        dict(name='div', attrs={'aria-labelledby': 'in_this_module'}),
+        dict(name='div', attrs={'class_': 'metadata'}),
+    ]
+    keep_only_tags = [dict(id=['content'])]
+    language = 'en'
+    language_url = 'en_US'
+
+    def parse_index(self):
+        site = self.url_prefix + '/' + self.language_url + '/docs/Learn'
+        print(site)
+        soup = self.index_to_soup(site)
+        volumenlist = []
+        lilist = soup.find_all("li", class_="toggle")
+
+        mainlistr = None
+        for litag in lilist:
+            nextmainli = litag.find_previous_sibling('li').find('strong')
+            if nextmainli != None:
+                mainlistr = nextmainli.string
+
+            volumenlist_title = mainlistr + " " + litag.find('summary').string
+            articles = []
+            for articles_a in litag.find_all('a'):
+                articles.append({
+                    'title': articles_a.string,
+                    'url': self.url_prefix + articles_a.get('href'),
+                    'description': articles_a.string,
+                    })
+
+            volumenlist.append((volumenlist_title, articles))
+
+        del volumenlist[25] # remove GitHub articles
+        volumenlist = volumenlist[:-4] # remove Server-side website programming and Further resources
+
+        return volumenlist

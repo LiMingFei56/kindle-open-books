@@ -37,6 +37,12 @@ List of Recipes in `calibre-recipes` Folder
 + The_Definitive_Guide_to_Yii_2.0.recipe - [The Definitive Guide to Yii 2.0](http://www.yiiframework.com/doc-2.0/guide-index.html)
 + Tutorials_about_Development_for_Android.recipe - [Tutorials about Development for Android](http://www.vogella.com/tutorials/android.html)
 
+## English new
++ Guide_to_Rustc_Development.recipe - [Guide_to_Rustc_Development](https://rustc-dev-guide.rust-lang.org/about-this-guide.html)
++ Mdn_Learn.recipe - [MDN Learn](https://developer.mozilla.org/en-US/docs/Learn)
++ Programming_in_Lua.recipe - [Programming in Lua](http://www.lua.org/pil/contents.html)
++ The_Rust_Programming_Language.recipe - [The Rust Programming Language.recipe](https://doc.rust-lang.org/book/)
+
 ## Simplified Chinese
 
 + A_Mathematical_Theory_of_Communication.recipe - [通信的数学理论](http://www.ituring.com.cn/minibook/611)

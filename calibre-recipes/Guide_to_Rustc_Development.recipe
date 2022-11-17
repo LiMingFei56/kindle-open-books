@@ -1,0 +1,40 @@
+from calibre.web.feeds.recipes import BasicNewsRecipe
+
+class Guide_to_Rustc_Development(BasicNewsRecipe):
+
+    title = 'Guide to Rustc Development'
+    description = "This guide is meant to help document how rustc – the Rust compiler – works, as well as to help new contributors get involved in rustc development."
+
+    url_prefix = 'https://rustc-dev-guide.rust-lang.org/'
+    no_stylesheets = True
+    max_articles_per_feed = 500
+    simultaneous_downloads = 10
+    keep_only_tags = [{ 'id': 'content' }]
+
+    def get_title(self, link):
+        return link.string
+
+    def parse_index(self):
+        soup = self.index_to_soup('https://rustc-dev-guide.rust-lang.org/about-this-guide.html')
+
+        nav = soup.find("nav", {"class": "sidebar"})
+
+        articles = []
+        for link in nav.find_all("a"):
+            
+            title = self.get_title(link)
+            if title is None:
+                title = ""
+                title = title.join(link.strings)
+                title = title.replace("\xa0", " ")
+
+            if link.get("href") is None:
+                continue
+            url = self.url_prefix + link['href']
+            a = { 'title': title, 'url': url }
+
+            articles.append(a)
+
+        ans = [(title, articles)]
+
+        return ans
