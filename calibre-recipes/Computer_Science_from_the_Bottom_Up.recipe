@@ -8,7 +8,7 @@ class CSBU(BasicNewsRecipe):
 
     url_prefix = 'http://www.bottomupcs.com/'
     no_stylesheets = True
-    remove_tags = [{'name':'header'}, {'name':'footer'}, {'name':'div', 'class':'toc'}]
+    remove_tags = [{'name':'div', 'class':'toc'}]
     max_articles_per_feed = 500
 
     def get_title(self, link):
@@ -21,9 +21,9 @@ class CSBU(BasicNewsRecipe):
 
         articles = []
         for link in toc.findAll('a'):
-            # pattern = re.compile(r'^.*\.html$')
-            # if not pattern.match(link['href']):
-            #    continue
+            pattern = re.compile(r'^.*\.html$')
+            if not pattern.match(link['href']):
+               continue
             
             title = self.get_title(link)
             if title is None:

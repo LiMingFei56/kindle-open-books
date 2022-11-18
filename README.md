@@ -38,10 +38,14 @@ List of Recipes in `calibre-recipes` Folder
 + Tutorials_about_Development_for_Android.recipe - [Tutorials about Development for Android](http://www.vogella.com/tutorials/android.html)
 
 ## English new
++ Flask_Tutorial.recipe - [Flask Tutorial](https://flask.palletsprojects.com/en/2.2.x/)
 + Guide_to_Rustc_Development.recipe - [Guide_to_Rustc_Development](https://rustc-dev-guide.rust-lang.org/about-this-guide.html)
 + Mdn_Learn.recipe - [MDN Learn](https://developer.mozilla.org/en-US/docs/Learn)
 + Programming_in_Lua.recipe - [Programming in Lua](http://www.lua.org/pil/contents.html)
-+ The_Rust_Programming_Language.recipe - [The Rust Programming Language.recipe](https://doc.rust-lang.org/book/)
++ The_Python_Standard_Library.recipe - [The Python Standard Library](https://docs.python.org/3/library/index.html)
++ The_Python_Tutorial.recipe - [The Python Tutorial](https://docs.python.org/3/tutorial/index.html)
++ The_Rust_Programming_Language.recipe - [The Rust Programming Language](https://doc.rust-lang.org/book/)
+
 
 ## Simplified Chinese
 

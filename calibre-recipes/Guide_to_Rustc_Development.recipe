@@ -35,6 +35,6 @@ class Guide_to_Rustc_Development(BasicNewsRecipe):
 
             articles.append(a)
 
-        ans = [(title, articles)]
+        ans = [(self.title, articles)]
 
         return ans

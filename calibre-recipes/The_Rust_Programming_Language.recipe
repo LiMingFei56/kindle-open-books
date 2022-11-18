@@ -35,6 +35,6 @@ class The_Rust_Programming_Language(BasicNewsRecipe):
 
             articles.append(a)
 
-        ans = [(title, articles)]
+        ans = [(self.title, articles)]
 
         return ans
