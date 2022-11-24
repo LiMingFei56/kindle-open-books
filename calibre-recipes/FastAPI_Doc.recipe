@@ -1,0 +1,43 @@
+import re
+from calibre.web.feeds.recipes import BasicNewsRecipe
+
+class FastAPI_Doc(BasicNewsRecipe):
+
+    title = 'FastAPI Doc'
+    description = 'FastAPI is a modern, fast (high-performance), web framework for building APIs with Python 3.7+ based on standard Python type hints.'
+    url_main = 'https://fastapi.tiangolo.com/'
+    url_prefix = url_main
+    no_stylesheets = True
+    # remove_tags = [{'name':'div', 'class':'toc'}]
+    keep_only_tags = [{ 'class': 'md-content' }]
+    max_articles_per_feed = 500
+
+    def parse_index(self):
+        soup = self.index_to_soup(self.url_main)
+
+        nav = soup.find('ul', {'class': 'md-nav__list'})
+
+        articles = []
+        pattern = re.compile('^/[a-z|A-Z]{2}')
+        for link in nav.findAll('a'):
+            href = link.get('href')
+            if href is None or '#' in href or pattern.match(href):
+                continue
+
+            title = link.string
+            if title is None:
+                title = ""
+                title = title.join(link.strings)
+                title = title.replace("\xa0", " ")
+                title = title.strip()
+            url = self.url_prefix + href 
+            if href == '.':
+                url = self.url_prefix
+            a = { 'title': title, 'url': url }
+
+            articles.append(a)
+
+        del articles[1]
+        ans = [(self.title, articles)]
+
+        return ans
