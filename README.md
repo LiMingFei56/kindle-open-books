@@ -57,6 +57,11 @@ List of Recipes in `calibre-recipes` Folder
 + Learn_Vimscript_the_Hard_Way_Zhcn.recipe - [笨方法学Vimscrpt 简体中文版](http://learnvimscriptthehardway.onefloweroneworld.com/)
 + Pro_Git_ZH.recipe - [Pro Git 简体中文版](http://iissnan.com/progit/)
 
+## Simplified Chinese new
+
++ RuoYi_Doc.recipe - [RuoYi 若依开发框架](http://doc.ruoyi.vip/)
+
+
 # Usage
 
 ## GUI

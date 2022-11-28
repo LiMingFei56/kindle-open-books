@@ -1,0 +1,30 @@
+from calibre.web.feeds.recipes import BasicNewsRecipe
+
+class RuoYi_Doc(BasicNewsRecipe):
+
+    title = "RuoYi Doc"
+    description = "基于SpringBoot、Shiro、Mybatis的权限后台管理系统"
+    
+    url_main = "http://doc.ruoyi.vip/ruoyi/"
+    url_prefix = "http://doc.ruoyi.vip"
+    no_stylesheets = True
+    max_articles_per_feed = 500
+    keep_only_tags = [{ 'class': 'theme-default-content' }]
+    remove_tags = [dict(name='div', attrs={'class': 'line-numbers-wrapper'})]
+
+    def parse_index(self):
+        soup = self.index_to_soup(self.url_main)
+
+        nav = soup.find('section', {'class': 'sidebar-group'}) 
+
+        articles = []
+        for link in nav.find_all("a"):
+            art_title = link.string
+
+            url = self.url_prefix + link['href']
+            a = { 'title': art_title, 'url': url }
+
+            articles.append(a)
+
+        ans = [(self.title, articles)]
+        return ans
