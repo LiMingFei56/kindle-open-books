@@ -1,0 +1,33 @@
+from calibre.web.feeds.recipes import BasicNewsRecipe
+
+class Pandas_Doc(BasicNewsRecipe):
+
+    title = "Pandas Doc"
+    description = "The User Guide covers all of pandas by topic area. Each of the subsections introduces a topic (such as “working with missing data”), and discusses how pandas approaches the problem, with many examples throughout."
+    
+    url_main = "http://pandas.pydata.org/pandas-docs/stable/user_guide/index.html"
+    url_prefix = "http://pandas.pydata.org/pandas-docs/stable/user_guide/"
+    no_stylesheets = True
+    max_articles_per_feed = 500
+    keep_only_tags = [{ 'class': 'bd-main' }]
+    remove_tags = [dict(name='div', attrs={'class': 'bd-sidebar-secondary'})]
+
+    def parse_index(self):
+        soup = self.index_to_soup(self.url_main)
+
+        nav = soup.find('nav', {'id': 'bd-docs-nav'}) 
+
+        articles = []
+        for link in nav.find_all("a"):
+            href = link.get('href')
+            if href is None:
+                continue
+            art_title = link.string.strip()
+
+            url = self.url_prefix + link['href']
+            a = { 'title': art_title, 'url': url }
+
+            articles.append(a)
+
+        ans = [(self.title, articles)]
+        return ans

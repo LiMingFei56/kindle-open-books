@@ -41,6 +41,7 @@ List of Recipes in `calibre-recipes` Folder
 + Flask_Tutorial.recipe - [Flask Tutorial](https://flask.palletsprojects.com/en/2.2.x/)
 + Guide_to_Rustc_Development.recipe - [Guide_to_Rustc_Development](https://rustc-dev-guide.rust-lang.org/about-this-guide.html)
 + Mdn_Learn.recipe - [MDN Learn](https://developer.mozilla.org/en-US/docs/Learn)
++ Pandas_Doc.recipe - [Pandas Doc](http://pandas.pydata.org/pandas-docs/stable/user_guide/index.html)
 + Programming_in_Lua.recipe - [Programming in Lua](http://www.lua.org/pil/contents.html)
 + The_Python_Standard_Library.recipe - [The Python Standard Library](https://docs.python.org/3/library/index.html)
 + The_Python_Tutorial.recipe - [The Python Tutorial](https://docs.python.org/3/tutorial/index.html)
