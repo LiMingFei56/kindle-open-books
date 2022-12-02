@@ -1,0 +1,37 @@
+from calibre.web.feeds.recipes import BasicNewsRecipe
+
+class Gimp_Doc(BasicNewsRecipe):
+
+    title = "Gimp Doc"
+    description = "GNU Image Manipulation Program"
+
+    url_main = "https://docs.gimp.org/2.10/en/"
+    url_prefix = 'https://docs.gimp.org/2.10/en/'
+    no_stylesheets = True
+    max_articles_per_feed = 500
+    keep_only_tags = [{ 'class': 'sect1' }]
+
+    def parse_index(self):
+        soup = self.index_to_soup(self.url_main)
+
+        nav = soup.find('div', {'class': 'toc'}) 
+
+        articles = []
+        for link in nav.find_all("a"):
+            href = link.get('href')
+            if href is None or '#' in href:
+                continue
+
+            art_title = link.string
+            if art_title is None:
+                art_title = ""
+                art_title = art_title.join(link.strings)
+                art_title = art_title.replace("\xa0", " ")
+
+            url = self.url_prefix + href
+            a = { 'title': art_title, 'url': url }
+
+            articles.append(a)
+
+        ans = [(self.title, articles)]
+        return ans
