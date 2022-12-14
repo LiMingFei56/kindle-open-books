@@ -47,6 +47,7 @@ List of Recipes in `calibre-recipes` Folder
 + The_Python_Tutorial.recipe - [The Python Tutorial](https://docs.python.org/3/tutorial/index.html)
 + The_Rust_Programming_Language.recipe - [The Rust Programming Language](https://doc.rust-lang.org/book/)
 + Gimp_Doc.recipe - [Gimp Doc](https://docs.gimp.org/2.10/en/)
++ The_Hitchhiker_S_Guide_To_Python.recipe [The hitchhiker's guide to python](https://docs.python-guide.org/)
 
 
 ## Simplified Chinese

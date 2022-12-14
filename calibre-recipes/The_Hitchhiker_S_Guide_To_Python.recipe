@@ -1,0 +1,37 @@
+from calibre.web.feeds.recipes import BasicNewsRecipe
+
+class The_Hitchhiker_S_Guide_To_Python(BasicNewsRecipe):
+
+    title = "The hitchhiker's guide to python"
+    description = "This handcrafted guide exists to provide both novice and expert Python developers a best practice handbook for the installation, configuration, and usage of Python on a daily basis."
+
+    url_main = 'https://docs.python-guide.org/'
+    url_prefix = 'https://docs.python-guide.org/'
+    no_stylesheets = True
+    max_articles_per_feed = 500
+    keep_only_tags = [{ 'class': 'body' }]
+
+    def parse_index(self):
+        soup = self.index_to_soup(self.url_main)
+
+        nav = soup.find('div', {'id': 'the-hitchhiker-s-guide-to-python'}) 
+
+        articles = []
+        for link in nav.find_all("a"):
+            href = link.get('href')
+            if href is None or '#' in href:
+                continue
+
+            art_title = link.string
+            if art_title is None:
+                art_title = ""
+                art_title = art_title.join(link.strings)
+                art_title = art_title.replace("\xa0", " ")
+
+            url = self.url_prefix + href 
+            a = { 'title': art_title, 'url': url }
+
+            articles.append(a)
+
+        ans = [(self.title, articles[1:])]
+        return ans
