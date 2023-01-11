@@ -1,9 +1,9 @@
 from calibre.web.feeds.recipes import BasicNewsRecipe
 
-class Mdn_Learn(BasicNewsRecipe):
+class Mdn_Canvas_Api(BasicNewsRecipe):
 
-    title = 'MDN web docs'
-    description = 'The aim of this area of MDN is not to take you from "beginner" to "expert" but to take you from "beginner" to "comfortable." From there, you should be able to start making your way, learning from the rest of MDN, and other intermediate to advanced resources that assume a lot of previous knowledge.'
+    title = 'MDN Canvas API'
+    description = 'The Canvas API provides a means for drawing graphics via JavaScript and the HTML <canvas> element. Among other things, it can be used for animation, game graphics, data visualization, photo manipulation, and real-time video processing.'
     cover_url = None
 
     url_prefix = 'https://developer.mozilla.org'
@@ -18,7 +18,7 @@ class Mdn_Learn(BasicNewsRecipe):
     language_url = 'en_US'
 
     def parse_index(self):
-        site = self.url_prefix + '/' + self.language_url + '/docs/Learn'
+        site = self.url_prefix + '/' + self.language_url + '/docs/Web/API/Canvas_API/Tutorial/Basic_usage'
         soup = self.index_to_soup(site)
         volumenlist = []
         lilist = soup.find_all("li", class_="toggle")
@@ -39,8 +39,5 @@ class Mdn_Learn(BasicNewsRecipe):
                     })
 
             volumenlist.append((volumenlist_title, articles))
-
-        del volumenlist[25] # remove GitHub articles
-        volumenlist = volumenlist[:-4] # remove Server-side website programming and Further resources
 
         return volumenlist

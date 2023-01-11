@@ -1,0 +1,45 @@
+from calibre.web.feeds.recipes import BasicNewsRecipe
+
+class Mdn_Performance(BasicNewsRecipe):
+
+    title = 'MDN Performance'
+    description = 'Web performance is the objective measurements and the perceived user experience of load time and runtime. '
+    cover_url = None
+
+    url_prefix = 'https://developer.mozilla.org'
+    no_stylesheets = True
+    keep_only_tags = [dict(id=['content'])]
+    language = 'en'
+    language_url = 'en_US'
+
+    def parse_index(self):
+        site = self.url_prefix + '/' + self.language_url + '/docs/Web/Performance'
+        soup = self.index_to_soup(site)
+        volumenlist = []
+        nav = soup.find("nav", {"class": "sidebar-inner"})
+        lilist = nav.find_all("a")
+
+        articles = []
+        for link in lilist:
+            href = link.get('href')
+            if href is None or '#' in href:
+                continue
+
+            title = link.string
+            if title is None:
+                title = ""
+                title = title.join(link.strings)
+                title = title.replace("\xa0", " ")
+            
+
+            a = self.url_prefix + href
+
+            art = {'title': title, 'url': a}
+            
+
+            articles.append(art)
+
+
+        ans = [(self.title, articles)]
+        return ans
+
