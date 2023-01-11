@@ -1,0 +1,41 @@
+import re
+from calibre.web.feeds.recipes import BasicNewsRecipe
+
+class Vue_Doc_Cn(BasicNewsRecipe):
+
+    title = "Vue Doc Cn"
+    description = "Vue Doc Cn"
+
+    url_main = 'https://cn.vuejs.org/guide/introduction.html'
+    url_prefix = 'https://cn.vuejs.org'
+    no_stylesheets = True
+    max_articles_per_feed = 500
+    keep_only_tags = [{ 'name': 'main' }]
+    remove_tags = [dict(name='p', class_='edit-link')]
+
+    def parse_index(self):
+        soup = self.index_to_soup(self.url_main)
+
+        nav = soup.find('nav', {'id': 'VPSidebarNav'}) 
+
+        articles = []
+        for link in nav.find_all("a"):
+            pattern = re.compile(r'^.*\.html$')
+            if not pattern.match(link['href']):
+               continue
+            
+            art_title = link.string
+            if art_title is None:
+                art_title = ""
+                art_title = art_title.join(link.strings)
+                art_title = art_title.replace("\xa0", " ")
+
+            if link.get("href") is None:
+                continue
+            url = self.url_prefix + link['href']
+            a = { 'title': art_title, 'url': url }
+
+            articles.append(a)
+
+        ans = [(self.title, articles)]
+        return ans

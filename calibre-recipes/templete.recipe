@@ -1,0 +1,40 @@
+import re
+from calibre.web.feeds.recipes import BasicNewsRecipe
+
+class template(BasicNewsRecipe):
+
+    title = "<title>"
+    description = "<description>"
+
+    url_main = '<url_main>'
+    url_prefix = '<url_prefix>'
+    no_stylesheets = True
+    max_articles_per_feed = 500
+    # keep_only_tags = [{ 'class': 'body' }]
+
+    def parse_index(self):
+        soup = self.index_to_soup(self.url_main)
+
+        nav = soup.find('div', {'class': 'toctree-wrapper'}) 
+
+        articles = []
+        for link in nav.find_all("a"):
+            pattern = re.compile(r'^.*\.html$')
+            if not pattern.match(link['href']):
+               continue
+            
+            art_title = link.string
+            if art_title is None:
+                art_title = ""
+                art_title = art_title.join(link.strings)
+                art_title = art_title.replace("\xa0", " ")
+
+            if link.get("href") is None:
+                continue
+            url = self.url_prefix + link['href']
+            a = { 'title': art_title, 'url': url }
+
+            articles.append(a)
+
+        ans = [(self.title, articles)]
+        return ans

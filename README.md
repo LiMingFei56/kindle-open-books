@@ -63,6 +63,8 @@ List of Recipes in `calibre-recipes` Folder
 ## Simplified Chinese new
 
 + RuoYi_Doc.recipe - [RuoYi 若依开发框架](http://doc.ruoyi.vip/)
++ Vue_Doc_Cn.recipe - [Vue 文档](https://cn.vuejs.org/guide/introduction.html)
++ React_Doc_Cn.recipe - [React 文档](https://zh-hans.reactjs.org/docs/hello-world.html)
 
 
 # Usage
