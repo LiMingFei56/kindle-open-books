@@ -50,6 +50,7 @@ List of Recipes in `calibre-recipes` Folder
 + The_Hitchhiker_S_Guide_To_Python.recipe [The hitchhiker's guide to python](https://docs.python-guide.org/)
 
 
+
 ## Simplified Chinese
 
 + A_Mathematical_Theory_of_Communication.recipe - [通信的数学理论](http://www.ituring.com.cn/minibook/611)
